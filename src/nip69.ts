@@ -55,6 +55,8 @@ const getZap = (to: string, relay: string, amt?: number) => {
     }
     if (amt) zap.tags.push(["amount", amt.toString()])
     const j = finalizeEvent(zap, privateKey)
+    console.log(j)
     return JSON.stringify(j)
 }
-const wrapSend = (offer: nip19.OfferPointer) => (amt?: number) => nip69.SendNofferRequest(pool, privateKey, [offer.relay], offer.pubkey, { offer: offer.offer, amount: amt, zap: getZap(offer.pubkey, offer.relay, amt) })
+export type SendData = { amt?: number, payerData?: Record<string, string> }
+const wrapSend = (offer: nip19.OfferPointer) => (data: SendData = {}) => nip69.SendNofferRequest(pool, privateKey, [offer.relay], offer.pubkey, { offer: offer.offer, amount: data.amt, zap: getZap(offer.pubkey, offer.relay, data.amt), payer_data: data.payerData })

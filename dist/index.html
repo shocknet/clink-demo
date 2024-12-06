@@ -194,6 +194,18 @@
             const invoiceRequestContainer = document.createElement('div');
             invoiceRequestContainer.className = 'invoice-request-container';
 
+            const getProductData = function () {
+                const selected = document.querySelectorAll('.productData')
+                const productData = {}
+                selected.forEach(s => {
+                    const key = s.querySelector('.productDataKey').value
+                    const value = s.querySelector('.productDataValue').value
+                    if (key && value) {
+                        productData[key] = value
+                    }
+                })
+                return productData
+            };
             // Handle different price types
             if (decoded.priceType === 2) {
                 // For spontaneous payments, allow user to input amount
@@ -226,7 +238,7 @@
                         decodeErr.innerHTML = 'Amount is required';
                         return;
                     }
-                    const resWithAmount = await wrapSend(Number(amount));
+                    const resWithAmount = await wrapSend({ amt: Number(amount), payerData: getProductData() });
                     console.log({ resWithAmount })
                     decodeErr.innerHTML = resWithAmount.error || "";
                     const childElement = document.createElement('p');
@@ -241,7 +253,7 @@
                 invoiceRequestContainer.appendChild(requestInvoiceButton);
 
                 async function requestInvoice() {
-                    const res = await wrapSend();
+                    const res = await wrapSend({ payerData: getProductData() });
                     console.log({ res })
                     decodeErr.innerHTML = res.error || "";
                     const childElement = document.createElement('p');
@@ -249,6 +261,21 @@
                     invoiceRequestContainer.appendChild(childElement);
                 }
             }
+            const addDataButton = document.createElement('button');
+            addDataButton.innerHTML = 'Add Product Data';
+            addDataButton.onclick = function () {
+                const div = document.createElement('div');
+                div.style.display = 'flex';
+                div.style.alignItems = 'center'
+                div.classList.add('productData');
+                div.innerHTML = `
+                    <span onClick="this.parentElement.remove()">❌</span>
+                    <input type="text" class="productDataKey" placeholder="key">
+                    <input type="text" class="productDataValue" placeholder="value">
+                `;
+                invoiceRequestContainer.appendChild(div);
+            };
+            invoiceRequestContainer.appendChild(addDataButton);
 
             container.appendChild(invoiceRequestContainer);
         }

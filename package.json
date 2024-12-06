@@ -14,7 +14,7 @@
     "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.25.4",
     "babel-loader": "^9.1.3",
-    "nostr-tools": "github:shocknet/nostr-tools#da188cd4bd195f44cc690074a3898f354ae85100",
+    "nostr-tools": "github:shocknet/nostr-tools#27575ffb69d615691242df433a0ccc063f6b8346",
     "ts-loader": "^9.5.1",
     "typescript": "^5.5.4",
     "webpack": "^5.94.0",
