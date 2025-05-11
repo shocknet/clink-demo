@@ -1,2 +1,2 @@
-import './nip68'
-import './nip69'
+import './ndebit'
+import './noffer'
