@@ -21,10 +21,10 @@ export const decodeInput = async (input: string) => {
         if (json.status === "ERROR") {
             throw new Error(json.reason)
         }
-        if (!json.nip69) {
-            throw new Error("missing nip69 from lnurl address")
+        if (!json.clink_offer) {
+            throw new Error("missing clink_offer from lnurl address")
         }
-        const decoded = nip19.decode(json.nip69 as string)
+        const decoded = nip19.decode(json.clink_offer as string)
         if (!decoded || decoded.type !== "noffer") throw new Error("Invalid input")
         offer = decoded.data
     } else {

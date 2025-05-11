@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <h1>NIP-68 Demo Client</h1>
+    <h1>CLINK Debit Demo</h1>
 
     <!-- GitHub Banner -->
     <div class="github-banner">
@@ -230,11 +230,11 @@
                 const response = await fetch(lnurl);
                 const data = await response.json();
 
-                if (data.nip69) {
-                    lnurlResult.innerHTML = `This address supports NIP-69: ${data.nip69}`;
-                    document.getElementById('noffer').value = data.nip69;
+                if (data.clink_offer) {
+                    lnurlResult.innerHTML = `This address supports clink_offer: ${data.clink_offer}`;
+                    document.getElementById('noffer').value = data.clink_offer;
                 } else {
-                    lnurlResult.innerHTML = 'This address does not support NIP-69';
+                    lnurlResult.innerHTML = 'This address does not support clink_offer';
                 }
             } catch (e) {
                 lnurlErr.innerHTML = 'Failed to fetch LNURL data';

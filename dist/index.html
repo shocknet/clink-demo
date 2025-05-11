@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CLINK (Commong Lightning Interactions with Nostr Keys) Demo Client</title>
+    <title>CLINK Demo Client</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="fav.png">
 </head>
 
 <body>
-    <h1>NIP-69 Demo Client</h1>
+    <h1>CLINK (Common Lightning Interactions with Nostr Keys) Demo Client</h1>
 
     <!-- GitHub Banner -->
     <div class="github-banner">
@@ -316,11 +316,11 @@
                 const response = await fetch(lnurl);
                 const data = await response.json();
 
-                if (data.nip69) {
-                    lnurlResult.innerHTML = `This address supports NIP-69: ${data.nip69}`;
-                    document.getElementById('noffer').value = data.nip69;
+                if (data.clink_offer) {
+                    lnurlResult.innerHTML = `This address has a CLINK Offer: ${data.clink_offer}`;
+                    document.getElementById('noffer').value = data.clink_offer;
                 } else {
-                    lnurlResult.innerHTML = 'This address does not support NIP-69';
+                    lnurlResult.innerHTML = 'This address does not have a CLINK Offer';
                 }
             } catch (e) {
                 lnurlErr.innerHTML = 'Failed to fetch LNURL data';
