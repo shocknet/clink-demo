@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLINK SDK Demo - Pay with Debit</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CLINK SDK Demo</h1>
+            <nav><a href="index.html" class="nav-link">&larr; Back to Offers</a></nav>
+        </header>
+
+        <main>
+            <div class="intro-section">
+                <h2>What is CLINK?</h2>
+                <p>CLINK provides standardized, <strong>Nostr-native</strong> methods for common Lightning interactions. It uses Nostr's built-in transport, identity, and encryption to let Lightning apps and nodes talk to each other securely.</p><p>This approach avoids the reliance on traditional web servers, offering a greatly enhanced user experience over alternatives like LNURL or NWC.</p>
+                <p>An <code>ndebit</code> is a static, shareable code that grants permission for another party to request payments from your Lightning node over Nostr.</p>
+            </div>
+
+            <div class="demo-section">
+                <h2>Pay an Invoice with a CLINK Debit</h2>
+                <p>Paste an <code>ndebit</code> string and a BOLT 11 invoice to authorize a payment from a provider. This demonstrates how a client can request a payment from a server that has been granted permission.</p>
+                <p>You can get an <code>ndebit</code> from a CLINK-compatible wallet like <a href="https://shockwallet.app" target="_blank" rel="noopener noreferrer">ShockWallet</a> to try this feature.</p>
+                <div class="form-group">
+                    <label for="ndebitInput">Debit String (ndebit)</label>
+                    <textarea id="ndebitInput" placeholder="Paste your ndebit string here..."></textarea>
+                </div>
+                <div class="results-section decoded-data-container">
+                    <h3>Decoded Debit Data</h3>
+                    <pre id="decodedDebitData">Decoded data will appear here...</pre>
+                </div>
+                <div id="debit-actions" style="display: none;">
+                    <div class="form-group">
+                        <label for="bolt11Input">Invoice to Pay (bolt11)</label>
+                        <textarea id="bolt11Input" placeholder="Paste the bolt11 invoice to pay"></textarea>
+                        <div class="qr-code-container" id="debit-qr-container" style="display: none;">
+                            <canvas id="debitQrCanvas"></canvas>
+                        </div>
+                    </div>
+                    <div id="client-identity" style="display: none; margin-bottom: 1rem; font-size: 0.9rem; opacity: 0.8; text-align: center;">
+                        <small>Requesting as: <span id="client-npub"></span></small>
+                    </div>
+                </div>
+                <button id="debitActionButton">Decode Debit</button>
+                <div id="payment-result" class="results-section" style="display: none;">
+                    <h3>Payment Result</h3>
+                    <pre id="paymentData">The result of the payment will appear here...</pre>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Learn more about the CLINK protocol on <a href="https://github.com/shocknet/clink" target="_blank">GitHub</a>.</p>
+        </footer>
+    </div>
+    <script src="debit.js"></script>
+</body>
+</html> 
