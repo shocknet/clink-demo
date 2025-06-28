@@ -13,7 +13,6 @@ const paymentData = document.getElementById('paymentData') as HTMLPreElement;
 const qrContainer = document.getElementById('debit-qr-container') as HTMLDivElement;
 const qrCanvas = document.getElementById('debitQrCanvas') as HTMLCanvasElement;
 const decodedDataContainer = document.querySelector('.decoded-data-container') as HTMLDivElement;
-const bolt11FormGroup = bolt11Input.parentElement as HTMLDivElement;
 const debitActions = document.getElementById('debit-actions') as HTMLDivElement;
 const clientIdentityDiv = document.getElementById('client-identity') as HTMLDivElement;
 const clientNpubSpan = document.getElementById('client-npub') as HTMLSpanElement;

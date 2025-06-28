@@ -167,7 +167,6 @@ async function checkLightningAddress() {
         if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
         const data = await resp.json();
 
-        const pubkey = data.names?.[name] ?? null;
         let offer: string | null = null;
         if (typeof data.clink_offer === 'string') {
             offer = data.clink_offer;
