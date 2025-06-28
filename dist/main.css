@@ -394,4 +394,23 @@ main a:hover {
         padding: 1rem;
         font-size: 0.8rem;
     }
+}
+
+#lnAddressInput {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-family: 'Fira Code', 'Menlo', monospace;
+    font-size: 0.9rem;
+    background-color: var(--input-bg-color);
+    color: var(--on-surface-color);
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#lnAddressInput:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(187, 134, 252, 0.2);
 } 
