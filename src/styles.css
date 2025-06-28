@@ -179,7 +179,7 @@ code {
     color: var(--on-surface-color);
 }
 
-textarea, input[type="number"], input[type="text"], input[type="email"] {
+main textarea, main input[type="number"], main input[type="text"], main input[type="email"] {
     width: 100%;
     padding: 0.75rem;
     border: 1px solid var(--border-color);
@@ -192,13 +192,13 @@ textarea, input[type="number"], input[type="text"], input[type="email"] {
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-textarea:focus, input[type="number"]:focus, input[type="text"]:focus, input[type="email"]:focus {
+main textarea:focus, main input[type="number"]:focus, main input[type="text"]:focus, main input[type="email"]:focus {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(187, 134, 252, 0.2);
 }
 
-textarea {
+main textarea {
     min-height: 120px;
     resize: vertical;
     margin-bottom: 0.5rem;
