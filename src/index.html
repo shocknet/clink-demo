@@ -32,11 +32,25 @@
 
     <main>
         <div class="intro-section">
-            <h2>Static, Shareable Lightning Payment Links</h2>
+            <h2>Offers: Static, Shareable Lightning Payment Codes</h2>
             <p>CLINK (Common Lightning Interactions with Nostr Keys) provides standardized, <strong>Nostr-native</strong> methods for connecting Lightning Nodes to the Web and Applications. It uses Nostr's built-in transport, identity, and encryption to let Lightning apps and nodes talk to each other securely from anywhere.</p><p>This approach avoids the reliance on traditional web servers or slow and unreliable P2P onion messages, offering broader applicability and enhanced usability over alternatives like LNURL or Bolt12.</p>
             <p class="intro-definition">An <code>noffer</code> is a static, shareable code that allows anyone to request an invoice from your Lightning node over Nostr.</p>
         </div>
         
+        <section id="address-checker-section" style="margin-bottom:2rem;">
+            <h2>Check a Lightning Address for CLINK</h2>
+            <p>Enter a Lightning Address (NIP-05 identifier like <code>alice@example.com</code>). The demo will fetch the NIP-05 record and report whether it advertises a <code>clink_offer</code>.</p>
+            <div class="form-group">
+                <label for="lnAddressInput">Lightning Address</label>
+                <input type="text" id="lnAddressInput" placeholder="alice@clinkme.dev" />
+            </div>
+            <button id="checkAddressButton">Check Address</button>
+            <div class="results-section" id="address-result-section" style="display:none;">
+                <h3 id="address-result-header">Result</h3>
+                <pre id="address-result-data"></pre>
+            </div>
+        </section>
+
         <hr>
 
         <h2>Generate a Lightning Invoice from an Offer</h2>

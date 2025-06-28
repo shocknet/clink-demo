@@ -15,6 +15,13 @@ const resultData = document.getElementById('result-data') as HTMLPreElement;
 const qrPlaceholder = document.getElementById('qr-placeholder') as HTMLSpanElement;
 const qrCanvas = document.getElementById('qrCanvas') as HTMLCanvasElement;
 
+// Address Checker DOM Elements
+const lnAddressInput = document.getElementById('lnAddressInput') as HTMLInputElement;
+const checkAddressButton = document.getElementById('checkAddressButton') as HTMLButtonElement;
+const addressResultSection = document.getElementById('address-result-section') as HTMLDivElement;
+const addressResultHeader = document.getElementById('address-result-header') as HTMLHeadingElement;
+const addressResultData = document.getElementById('address-result-data') as HTMLPreElement;
+
 const DEFAULT_NOFFER = 'noffer1qvqsyqjqvdjkzvfevgckxvryx5er2vp5v3jngde3xscxxcmpx4jnzdnxxqcn2de3x93rxvfe8qervcmz8yer2ep5vyek2wp5v43xxwpjxymrsvcprfmhxue69uhhxarjvee8jtnndphkx6ewdejhgam0wf4sqg8rqmz9ac98cae9grcaez9spaua95u3p075q3lfzpvynxx7nj0zhctqp26c';
 
 // State
@@ -41,6 +48,10 @@ function showQr(show: boolean) {
 
 function scrollIntoView() {
     resultsSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function scrollIntoViewElement(el: HTMLElement) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 // Event Handlers
@@ -133,11 +144,61 @@ const handleDecodeOrReset = () => {
     }
 };
 
+async function checkLightningAddress() {
+    let addr = lnAddressInput.value.trim();
+    if (!addr && lnAddressInput.placeholder) {
+        addr = lnAddressInput.placeholder.trim();
+        lnAddressInput.value = addr; // populate field so user sees used value
+    }
+    if (!addr || !addr.includes('@')) {
+        alert('Please enter a valid Lightning address (e.g., alice@example.com)');
+        return;
+    }
+
+    const [name, domain] = addr.split('@');
+    const url = `https://${domain}/.well-known/nostr.json?name=${encodeURIComponent(name)}`;
+
+    addressResultHeader.textContent = 'Checking…';
+    addressResultData.textContent = `GET ${url}`;
+    addressResultSection.style.display = 'block';
+
+    try {
+        const resp = await fetch(url, { headers: { 'Accept': 'application/json' } });
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        const data = await resp.json();
+
+        const pubkey = data.names?.[name] ?? null;
+        let offer: string | null = null;
+        if (typeof data.clink_offer === 'string') {
+            offer = data.clink_offer;
+        } else if (data.clink_offer && typeof data.clink_offer === 'object') {
+            offer = data.clink_offer[name] ?? null;
+        }
+
+        if (offer) {
+            addressResultHeader.textContent = 'CLINK Enabled 🎉';
+        } else {
+            addressResultHeader.textContent = 'No CLINK Offer Found';
+        }
+
+        addressResultData.textContent = JSON.stringify(data, null, 2);
+    } catch (error) {
+        console.error('Address check failed:', error);
+        addressResultHeader.textContent = 'Error';
+        addressResultData.textContent = `${error instanceof Error ? error.message : String(error)}`;
+    }
+
+    setTimeout(() => scrollIntoViewElement(addressResultSection), 100);
+}
+
 // Event Listeners
 decodeOfferButton.addEventListener('click', handleDecodeOrReset);
 getInvoiceButton.addEventListener('click', handleGetInvoice);
 
 nofferInput.addEventListener('input', resetUI);
+
+// Address Checker Event Listeners
+checkAddressButton.addEventListener('click', checkLightningAddress);
 
 // Initial State
 nofferInput.value = DEFAULT_NOFFER;

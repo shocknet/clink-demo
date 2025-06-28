@@ -179,7 +179,7 @@ code {
     color: var(--on-surface-color);
 }
 
-textarea, input[type="number"] {
+textarea, input[type="number"], input[type="text"], input[type="email"] {
     width: 100%;
     padding: 0.75rem;
     border: 1px solid var(--border-color);
@@ -192,7 +192,7 @@ textarea, input[type="number"] {
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-textarea:focus, input[type="number"]:focus {
+textarea:focus, input[type="number"]:focus, input[type="text"]:focus, input[type="email"]:focus {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(187, 134, 252, 0.2);
