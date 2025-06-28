@@ -3,18 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CLINK SDK Demo - Get Invoice from Offer</title>
+
+    <!-- Primary Meta Tags -->
+    <title>CLINK Demo - Nostr-Native Lightning Interactions</title>
+    <meta name="title" content="CLINK Demo - Nostr-Native Lightning Interactions">
+    <meta name="description" content="A live demonstration of CLINK (Common Lightning Interactions with Nostr Keys), a protocol for Nostr-native Lightning offers and debits without web servers.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://clinkme.dev/">
+    <meta property="og:title" content="CLINK Demo - Nostr-Native Lightning Interactions">
+    <meta property="og:description" content="A live demonstration of CLINK (Common Lightning Interactions with Nostr Keys), a protocol for Nostr-native Lightning offers and debits without web servers.">
+    <meta property="og:image" content="https://clinkme.dev/favicon.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://clinkme.dev/">
+    <meta property="twitter:title" content="CLINK Demo - Nostr-Native Lightning Interactions">
+    <meta property="twitter:description" content="A live demonstration of CLINK (Common Lightning Interactions with Nostr Keys), a protocol for Nostr-native Lightning offers and debits without web servers.">
+    <meta property="twitter:image" content="https://clinkme.dev/favicon.png">
+
 </head>
 <body>
     <header>
-        <h1>CLINK SDK Demo</h1>
+        <h1>CLINK Protocol Demo</h1>
         <nav><a href="debit.html" class="nav-link">Want to request payments? Try CLINK Debits &rarr;</a></nav>
     </header>
 
     <main>
-        <h2>What is CLINK?</h2>
-        <p>CLINK (Common Lightning Interactions with Nostr Keys) provides standardized, <strong>Nostr-native</strong> methods for connecting Lightning Nodes to the Web and Applications. It uses Nostr's built-in transport, identity, and encryption to let Lightning apps and nodes talk to each other securely from anywhere.</p><p>This approach avoids the reliance on traditional web servers or slow and unreliable P2P onion messages, offering broader applicability and enhanced usability over alternatives like LNURL or Bolt12.</p>
-        <p>An <code>noffer</code> is a static, shareable code that allows anyone to request an invoice from your Lightning node over Nostr.</p>
+        <div class="intro-section">
+            <h2>Static, Shareable Lightning Payment Links</h2>
+            <p>CLINK (Common Lightning Interactions with Nostr Keys) provides standardized, <strong>Nostr-native</strong> methods for connecting Lightning Nodes to the Web and Applications. It uses Nostr's built-in transport, identity, and encryption to let Lightning apps and nodes talk to each other securely from anywhere.</p><p>This approach avoids the reliance on traditional web servers or slow and unreliable P2P onion messages, offering broader applicability and enhanced usability over alternatives like LNURL or Bolt12.</p>
+            <p class="intro-definition">An <code>noffer</code> is a static, shareable code that allows anyone to request an invoice from your Lightning node over Nostr.</p>
+        </div>
         
         <hr>
 
