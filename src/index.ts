@@ -1,7 +1,6 @@
-import './styles.css';
-import { decodeBech32, SendNofferRequest, OfferPointer } from "@shocknet/clink-sdk";
-import { SimplePool } from 'nostr-tools';
+import { decodeBech32, SendNofferRequest, OfferPointer, SimplePool } from "@shocknet/clink-sdk";
 import QRCode from 'qrcode';
+import './styles.css';
 import { clientPrivateKey } from "./utils";
 
 // DOM Elements

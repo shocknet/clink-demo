@@ -1,7 +1,4 @@
-import { decodeBech32, SendNdebitRequest, newNdebitPaymentRequest, DebitPointer } from "@shocknet/clink-sdk";
-import { getPublicKey } from 'nostr-tools/pure';
-import { SimplePool } from 'nostr-tools';
-import { nip19 } from 'nostr-tools';
+import { decodeBech32, SendNdebitRequest, newNdebitPaymentRequest, DebitPointer, getPublicKey, SimplePool, nip19 } from "@shocknet/clink-sdk";
 import QRCode from 'qrcode';
 import './styles.css';
 import { clientPrivateKey } from "./utils";

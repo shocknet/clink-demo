@@ -1,4 +1,4 @@
-import { generateSecretKey } from 'nostr-tools/pure';
+import { generateSecretKey } from '@shocknet/clink-sdk';
 
 /**
  * Manages the client's private key.
