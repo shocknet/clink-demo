@@ -14,7 +14,9 @@ module.exports = (env, argv) => {
         output: {
             filename: '[name].js',
             path: path.resolve(__dirname, 'dist'),
-            clean: true,
+            clean: {
+                keep: /(favicon\.png|clinkmedev-og-card\.png)$/,
+            },
         },
         resolve: {
             extensions: ['.ts', '.js']
@@ -40,13 +42,20 @@ module.exports = (env, argv) => {
                 template: './src/index.html',
                 filename: 'index.html',
                 chunks: ['main', 'utils'],
-                favicon: './src/favicon.png',
+                meta: {
+                    'og:image': 'https://clinkme.dev/clinkmedev-og-card.png',
+                    'og:logo': 'https://clinkme.dev/favicon.png'
+                },
+                favicon: './dist/favicon.png'
             }),
             new HtmlWebpackPlugin({
                 template: './src/debit.html',
                 filename: 'debit.html',
                 chunks: ['debit', 'utils'],
-                favicon: './src/favicon.png',
+                meta: {
+                    'og:image': 'clinkmedev-og-card.png',
+                },
+                favicon: './dist/favicon.png'
             }),
         ].concat(isProduction ? [new MiniCssExtractPlugin()] : []),
         devServer: {
