@@ -8,7 +8,7 @@ It showcases the three core interactions defined by **CLINK** (Common Lightning 
 2. **Offers (`noffer`)** – ask a remote node for a fresh BOLT-11 invoice over Nostr.
 3. **Debits (`ndebit`)** – authorise a remote node to pay a BOLT-11 invoice from your wallet.
 
-Everything flows through Nostr – no HTTP callbacks, WebSockets or Tor onion-messages are required.
+Everything flows through Nostr – no HTTP callbacks, WebSockets or Tor-like onion-messages are required.
 
 ---
 
