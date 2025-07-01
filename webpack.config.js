@@ -42,20 +42,11 @@ module.exports = (env, argv) => {
                 template: './src/index.html',
                 filename: 'index.html',
                 chunks: ['main', 'utils'],
-                meta: {
-                    'og:image': 'https://clinkme.dev/clinkmedev-og-card.png',
-                    'og:logo': 'https://clinkme.dev/favicon.png'
-                },
-                favicon: './dist/favicon.png'
             }),
             new HtmlWebpackPlugin({
                 template: './src/debit.html',
                 filename: 'debit.html',
                 chunks: ['debit', 'utils'],
-                meta: {
-                    'og:image': 'clinkmedev-og-card.png',
-                },
-                favicon: './dist/favicon.png'
             }),
         ].concat(isProduction ? [new MiniCssExtractPlugin()] : []),
         devServer: {
