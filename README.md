@@ -2,7 +2,7 @@
 
 A minimal web demo built with the [@shocknet/clink-sdk](https://www.npmjs.com/package/@shocknet/clink-sdk).
 
-It showcases the three core interactions defined by **CLINK** (Common Lightning Interactions with Nostr Keys):
+It showcases the three core interactions defined by **CLINK** (Common Lightning Interface for Nostr Keys):
 
 1. **Lightning-address discovery** – map an <code>user@domain</code> NIP-05 identifier to a <code>clink_offer</code> string.
 2. **Offers (`noffer`)** – ask a remote node for a fresh BOLT-11 invoice over Nostr.
