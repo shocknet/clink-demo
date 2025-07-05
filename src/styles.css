@@ -258,7 +258,7 @@ button {
     padding: 0.85rem;
     margin-top: 1rem;
     background: linear-gradient(90deg, #00e6e6 0%, #a259ff 20%, #a259ff 80%, #ffff00 100%);
-    color: #232323;
+    color: #fff;
     border: none;
     border-radius: 8px;
     font-size: 1rem;
@@ -274,7 +274,7 @@ button:hover:not(:disabled) {
     filter: brightness(1.08) saturate(1.2);
     box-shadow: 0 4px 16px 0 rgba(162,89,255,0.18);
     background: linear-gradient(90deg, #33fff6 0%, #b47cff 20%, #b47cff 80%, #ffff66 100%);
-    color: #232323;
+    color: #fff;
 }
 
 button:disabled {
@@ -497,4 +497,87 @@ main a:hover, .intro-section a:hover, .results-section a:hover, .decoded-data-co
     min-width: 0;
     display: block;
     margin: 0;
+}
+
+.main-nav {
+    width: 100%;
+    background: #181818;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 0.5rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 2px solid #393939;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
+}
+
+.main-nav .nav-link {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: background 0.15s, color 0.15s, border 0.15s;
+    border-bottom: 2.5px solid transparent;
+    display: inline-block;
+}
+
+.main-nav .nav-link:hover {
+    background: #232323;
+    color: #a259ff;
+    border-bottom: 2.5px solid #a259ff;
+}
+
+.main-nav .nav-link.active {
+    color: #ffff00;
+    border-bottom: 2.5px solid #ffff00;
+    background: #232323;
+}
+
+@media (max-width: 900px) {
+    .main-nav {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        padding: 0.5rem 0.5rem;
+    }
+    .main-nav .nav-link {
+        font-size: 0.95rem;
+        padding: 0.5rem 0.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .main-nav {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 0.25rem 0;
+    }
+    .main-nav .nav-link {
+        width: 100%;
+        text-align: left;
+        border-radius: 0;
+        border-left: 4px solid transparent;
+        border-bottom: none;
+        padding: 0.7rem 1rem;
+    }
+    .main-nav .nav-link.active {
+        border-left: 4px solid #ffff00;
+        background: #232323;
+        color: #ffff00;
+    }
+}
+
+.container {
+    margin-top: 1.5rem;
+}
+
+/* Remove old nav-link header styles if needed */
+header .nav-link {
+    display: none !important;
 } 
