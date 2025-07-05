@@ -100,13 +100,12 @@ const handleGetInvoice = async () => {
 
     try {
         const amountSats = amountInput.value ? parseInt(amountInput.value, 10) : undefined;
-        const amountMsats = amountSats ? amountSats * 1000 : undefined;
 
         // Use the CLINK SDK to send a request for an invoice from the offer provider.
         // This request is sent over Nostr and signed with our ephemeral client key.
         const response = await SendNofferRequest(
             pool, clientPrivateKey, [decodedOffer.relay], decodedOffer.pubkey,
-            { offer: decodedOffer.offer, amount: amountMsats }
+            { offer: decodedOffer.offer, amount: amountSats }
         );
 
         if ('bolt11' in response && typeof response.bolt11 === 'string') {
