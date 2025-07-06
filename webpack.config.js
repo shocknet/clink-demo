@@ -1,15 +1,32 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const glob = require('glob');
 
 module.exports = (env, argv) => {
     const isProduction = argv.mode === 'production';
+
+    // Find all HTML files in src
+    const htmlFiles = glob.sync('./src/*.html');
+    const htmlPlugins = htmlFiles.map(file => {
+        const name = path.basename(file, '.html');
+        let chunks = [];
+        if (name === 'index') chunks = ['main', 'utils'];
+        else if (name === 'debit') chunks = ['debit', 'utils'];
+        else chunks = ['static'];
+        return new HtmlWebpackPlugin({
+            template: file,
+            filename: path.basename(file),
+            chunks,
+        });
+    });
 
     return {
         entry: {
             utils: './src/utils.ts',
             main: './src/index.ts',
             debit: './src/debit.ts',
+            static: './src/static.ts',
         },
         output: {
             filename: '[name].js',
@@ -35,20 +52,19 @@ module.exports = (env, argv) => {
                         'css-loader'
                     ],
                 },
+                {
+                    test: /\.png$/,
+                    type: 'asset/resource',
+                    generator: {
+                        filename: '[name][ext]'
+                    }
+                }
             ]
         },
         plugins: [
-            new HtmlWebpackPlugin({
-                template: './src/index.html',
-                filename: 'index.html',
-                chunks: ['main', 'utils'],
-            }),
-            new HtmlWebpackPlugin({
-                template: './src/debit.html',
-                filename: 'debit.html',
-                chunks: ['debit', 'utils'],
-            }),
-        ].concat(isProduction ? [new MiniCssExtractPlugin()] : []),
+            ...htmlPlugins,
+            ...(isProduction ? [new MiniCssExtractPlugin()] : [])
+        ],
         devServer: {
             static: {
                 directory: path.join(__dirname, 'dist'),

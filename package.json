@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack serve",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production && cp src/nav.js dist/nav.js && cp src/nav.html dist/nav.html"
   },
   "keywords": [],
   "author": "",

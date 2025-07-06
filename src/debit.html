@@ -25,13 +25,16 @@
     <meta property="twitter:image" content="https://clinkme.dev/clinkmedev-og-card.png">
 
     <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preload" href="styles.css" as="style" onload="this.rel='stylesheet'">
+    <link href="styles.css" rel="stylesheet">
     <script defer data-domain="clinkme.dev" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
+    <div id="nav"></div>
+    <script src="nav.js"></script>
     <div class="container">
         <header>
             <h1>CLINK Protocol Demo</h1>
-            <nav><a href="index.html" class="nav-link">&larr; Back to Offers</a></nav>
         </header>
 
         <main>
