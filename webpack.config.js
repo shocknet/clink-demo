@@ -27,6 +27,7 @@ module.exports = (env, argv) => {
             main: './src/index.ts',
             debit: './src/debit.ts',
             static: './src/static.ts',
+            manage: './src/manage.ts',
         },
         output: {
             filename: '[name].js',

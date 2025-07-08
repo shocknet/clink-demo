@@ -24,7 +24,7 @@
     "@noble/curves": "^1.6.0",
     "@noble/hashes": "^1.5.0",
     "@scure/base": "^1.1.8",
-    "@shocknet/clink-sdk": "^1.1.4",
+    "@shocknet/clink-sdk": "^1.1.7",
     "@stablelib/xchacha20": "^2.0.0",
     "buffer": "^6.0.3",
     "html-webpack-plugin": "^5.6.3",
