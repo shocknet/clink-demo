@@ -40,7 +40,7 @@ function resetUI() {
     nmanageInput.disabled = false;
     decodedManage = null;
     isPaymentMade = false;
-    listOfferResult.textContent = 'List Result will appear here...';
+    listOfferResult.innerHTML = '';
 }
 
 // --- Event Handlers ---
@@ -68,6 +68,21 @@ const handleDecodeManage = () => {
     }
 };
 
+const handleDeleteOffer = async (offerId: string) => {
+    console.log("Deleting offer", offerId);
+    if (!decodedManage) {
+        alert("Manage data is missing. Please decode a new manage string.");
+        return;
+    }
+    const response = await SendNmanageRequest(pool, clientPrivateKey, [decodedManage.relay], decodedManage.pubkey, {
+        action: 'delete',
+        resource: 'offer',
+        offer: { id: offerId }
+    });
+    console.log(response);
+    handleListOffers();
+}
+
 const handleListOffers = async () => {
     console.log("Listing offers");
     if (!decodedManage) {
@@ -84,7 +99,43 @@ const handleListOffers = async () => {
         alert(response.error);
         return;
     }
-    listOfferResult.textContent = JSON.stringify(response.details, null, 2);
+    if (!response.details || !Array.isArray(response.details)) {
+        alert("Invalid response format");
+        return;
+    }
+    const offers = response.details;
+    listOfferResult.innerHTML = '';
+    offers.forEach(offer => {
+        const offerDiv = document.createElement('pre');
+        const labelP = document.createElement('p');
+        labelP.textContent = offer.label;
+        offerDiv.appendChild(labelP);
+
+        const priceP = document.createElement('p');
+        priceP.textContent = `Price: ${offer.price_sats} sats`;
+        offerDiv.appendChild(priceP);
+
+        const callbackUrlP = document.createElement('p');
+        callbackUrlP.textContent = `Callback URL: ${offer.callback_url}`;
+        offerDiv.appendChild(callbackUrlP);
+
+        const payerDataP = document.createElement('p');
+        payerDataP.textContent = `Payer Data: ${offer.payer_data.join(", ")}`;
+        offerDiv.appendChild(payerDataP);
+
+        const noffersP = document.createElement('p');
+        noffersP.textContent = `Noffer: ${offer.noffer}`;
+        offerDiv.appendChild(noffersP);
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.addEventListener('click', () => {
+            handleDeleteOffer(offer.id);
+        });
+        offerDiv.appendChild(deleteButton);
+
+        listOfferResult.appendChild(offerDiv);
+    })
 }
 
 const handleCreateOffer = async () => {
@@ -117,6 +168,7 @@ const handleCreateOffer = async () => {
         }
     })
     console.log(response);
+    handleListOffers();
 }
 
 // Event Listeners
