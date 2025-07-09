@@ -1,4 +1,4 @@
-import { decodeBech32, SendNmanageRequest, getPublicKey, SimplePool, nip19, ManagePointer } from "@shocknet/clink-sdk";
+import { decodeBech32, SendNmanageRequest, getPublicKey, SimplePool, nip19, ManagePointer, OfferData } from "@shocknet/clink-sdk";
 import QRCode from 'qrcode';
 import './styles.css';
 import { clientPrivateKey } from "./utils";
@@ -11,10 +11,13 @@ const decodedManageData = document.getElementById('decodedManageData') as HTMLPr
 const manageActions = document.getElementById('manage-actions') as HTMLDivElement;
 const listButton = document.getElementById('list-button') as HTMLButtonElement;
 const createButton = document.getElementById('create-button') as HTMLButtonElement;
+const updateButton = document.getElementById('update-button') as HTMLButtonElement;
+
 const callbackUrlInput = document.getElementById('callback-url') as HTMLInputElement;
 const labelInput = document.getElementById('label') as HTMLInputElement;
 const payerDataInput = document.getElementById('payer-data') as HTMLInputElement;
 const priceSatsInput = document.getElementById('price-sats') as HTMLInputElement;
+
 const listOfferResult = document.getElementById('listOfferResult') as HTMLDivElement;
 
 const clientIdentityDiv = document.getElementById('client-identity') as HTMLDivElement;
@@ -24,6 +27,7 @@ const clientNpubSpan = document.getElementById('client-npub') as HTMLSpanElement
 const pool = new SimplePool();
 let decodedManage: ManagePointer | null = null;
 let isPaymentMade = false;
+let updatingOfferId: string | null = null;
 
 function displayClientIdentity() {
     const publicKey = getPublicKey(clientPrivateKey);
@@ -41,6 +45,9 @@ function resetUI() {
     decodedManage = null;
     isPaymentMade = false;
     listOfferResult.innerHTML = '';
+    updateButton.style.display = 'none';
+    createButton.style.display = 'block';
+    updatingOfferId = null;
 }
 
 // --- Event Handlers ---
@@ -134,8 +141,60 @@ const handleListOffers = async () => {
         });
         offerDiv.appendChild(deleteButton);
 
+        const updateButton = document.createElement('button');
+        updateButton.textContent = 'Update';
+        updateButton.addEventListener('click', () => {
+            startUpdateOffer(offer);
+        });
+        offerDiv.appendChild(updateButton);
+
         listOfferResult.appendChild(offerDiv);
     })
+}
+
+const startUpdateOffer = async (offer: OfferData) => {
+    callbackUrlInput.value = offer.callback_url;
+    labelInput.value = offer.label;
+    payerDataInput.value = offer.payer_data.join(" ");
+    priceSatsInput.value = offer.price_sats.toString();
+    updateButton.style.display = 'block';
+    createButton.style.display = 'none';
+    updatingOfferId = offer.id;
+}
+
+const handleUpdateOffer = async () => {
+    console.log("Updating offer", updatingOfferId);
+    if (!decodedManage) {
+        alert("Manage data is missing. Please decode a new manage string.");
+        return;
+    }
+    if (!updatingOfferId) {
+        alert("Offer ID is missing. Please start an update offer.");
+        return;
+    }
+    const callbackUrl = callbackUrlInput.value.trim();
+    const label = labelInput.value.trim();
+    const payerData = payerDataInput.value.trim().split(" ");
+    const priceSats = +priceSatsInput.value.trim();
+    if (!label) {
+        alert("Label is required");
+        return;
+    }
+    const response = await SendNmanageRequest(pool, clientPrivateKey, [decodedManage.relay], decodedManage.pubkey, {
+        action: 'update',
+        resource: 'offer',
+        offer: {
+            id: updatingOfferId,
+            fields: {
+                callback_url: callbackUrl,
+                label: label,
+                payer_data: payerData,
+                price_sats: priceSats,
+            }
+        }
+    })
+    console.log(response);
+    handleListOffers();
 }
 
 const handleCreateOffer = async () => {
@@ -176,6 +235,7 @@ manageActionButton.addEventListener('click', handleDecodeManage);
 nmanageInput.addEventListener('input', resetUI);
 listButton.addEventListener('click', handleListOffers);
 createButton.addEventListener('click', handleCreateOffer);
+updateButton.addEventListener('click', handleUpdateOffer);
 
 
 
