@@ -105,7 +105,7 @@ const handleGetInvoice = async () => {
         // This request is sent over Nostr and signed with our ephemeral client key.
         const response = await SendNofferRequest(
             pool, clientPrivateKey, [decodedOffer.relay], decodedOffer.pubkey,
-            { offer: decodedOffer.offer, amount: amountSats }
+            { offer: decodedOffer.offer, amount_sats: amountSats }
         );
 
         if ('bolt11' in response && typeof response.bolt11 === 'string') {
