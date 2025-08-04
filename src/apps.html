@@ -82,10 +82,24 @@
         display: block;
         width: 100%;
       }
-      .content-section th, .content-section td {
+      .content-section td {
         box-sizing: border-box;
         width: 100%;
         padding: 0.7em 0.6em;
+        display: flex;
+        justify-content: space-between;
+        text-align: right;
+        border-bottom: 1px solid #333;
+      }
+      .content-section td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        text-align: left;
+        color: #00DAC6;
+        margin-right: 1em;
+      }
+      .content-section thead {
+        display: none;
       }
       .content-section th {
         background: #232323;
@@ -116,9 +130,9 @@
           </thead>
           <tbody>
             <tr>
-              <td>ShockWallet</td>
-              <td>Offers, Debits</td>
-              <td>Pay offers and manage your offers and requests via Lightning.Pub.</td>
+              <td data-label="Project"><a href="https://shockwallet.app" target="_blank" rel="noopener noreferrer">ShockWallet</a></td>
+              <td data-label="Supports">Offers, Debits</td>
+              <td data-label="Features / Notes">Pay offers and manage your offers and requests via Lightning.Pub.</td>
             </tr>
           </tbody>
         </table>
@@ -129,9 +143,9 @@
           </thead>
           <tbody>
             <tr>
-              <td>Lightning.Pub</td>
-              <td>Offers, Debits</td>
-              <td>Reference server for wallets.</td>
+              <td data-label="Project"><a href="https://lightning.pub" target="_blank" rel="noopener noreferrer">Lightning.Pub</a></td>
+              <td data-label="Supports">Offers, Debits</td>
+              <td data-label="Features / Notes">Reference server for wallets.</td>
             </tr>
           </tbody>
         </table>
@@ -142,14 +156,14 @@
           </thead>
           <tbody>
             <tr>
-              <td>Bridgelet</td>
-              <td>Offers</td>
-              <td>Simple NIP-05, LNURL and Lightning Address bridge for your custom domain, uses Offers to fetch invoices from your node.</td>
+              <td data-label="Project"><a href="https://github.com/shocknet/bridgelet" target="_blank" rel="noopener noreferrer">Bridgelet</a></td>
+              <td data-label="Supports">Offers</td>
+              <td data-label="Features / Notes">Simple NIP-05, LNURL and Lightning Address bridge for your custom domain, uses Offers to fetch invoices from your node.</td>
             </tr>
             <tr>
-              <td>CLINK SDK</td>
-              <td>Offers, Debits</td>
-              <td>JS/TS library for CLINK integration.</td>
+              <td data-label="Project"><a href="https://github.com/shocknet/CLINK/tree/main/ClinkSDK" target="_blank" rel="noopener noreferrer">CLINK SDK</a></td>
+              <td data-label="Supports">Offers, Debits</td>
+              <td data-label="Features / Notes">JS/TS library for CLINK integration.</td>
             </tr>
           </tbody>
         </table>
