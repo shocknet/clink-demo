@@ -66,7 +66,7 @@ clink-demo
 │   ├── debit.ts       # Debit flow
 │   ├── utils.ts       # localStorage-backed client key helper
 │   └── styles.css
-├── dist/              # Compiled output (git-ignored)
+├── dist/              # Compiled output (to verify demo)
 ├── webpack.config.js  # Build pipeline
 └── tsconfig.json
 ```
