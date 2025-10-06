@@ -13,6 +13,7 @@ module.exports = (env, argv) => {
         let chunks = [];
         if (name === 'index') chunks = ['main', 'utils'];
         else if (name === 'debit') chunks = ['debit', 'utils'];
+        else if (name === 'offers') chunks = ['main', 'static'];
         else chunks = ['static'];
         return new HtmlWebpackPlugin({
             template: file,
