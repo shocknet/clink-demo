@@ -22,7 +22,7 @@ const addressResultSection = document.getElementById('address-result-section') a
 const addressResultHeader = document.getElementById('address-result-header') as HTMLHeadingElement;
 const addressResultData = document.getElementById('address-result-data') as HTMLPreElement;
 
-const DEFAULT_NOFFER = 'noffer1qvqsyqjqvdjkzvfevgckxvryx5er2vp5v3jngde3xscxxcmpx4jnzdnxxqcn2de3x93rxvfe8qervcmz8yer2ep5vyek2wp5v43xxwpjxymrsvcprfmhxue69uhhxarjvee8jtnndphkx6ewdejhgam0wf4sqg8rqmz9ac98cae9grcaez9spaua95u3p075q3lfzpvynxx7nj0zhctqp26c';
+const DEFAULT_NOFFER = 'noffer1qvqsyqjqxuurvwpcxc6rvvrxxsurqep5vfjk2wf4v33nsenrxumnyvesxfnrswfkvycrwdp3x93xydf5xg6rzce4vv6xgdfh8quxgct9x5erxvspremhxue69uhhgetnwskhyetvv9ujumrfva58gmnfdenjuur4vgqzpccxc30wpf78wf2q78wg3vq008fd8ygtl4qy06gstpye3h5unc47xmee6z';
 
 // State
 const pool = new SimplePool();
@@ -130,8 +130,7 @@ const handleGetInvoice = async () => {
 
 const handleDecodeOrReset = () => {
     if (isInvoiceDisplayed) {
-        nofferInput.value = '';
-        nofferInput.placeholder = DEFAULT_NOFFER;
+        nofferInput.value = DEFAULT_NOFFER;
         resetUI();
     } else {
         let nofferStr = nofferInput.value.trim();
@@ -175,6 +174,8 @@ async function checkLightningAddress() {
 
         if (offer) {
             addressResultHeader.textContent = 'CLINK Enabled 🎉';
+            nofferInput.value = offer;
+            decodeOffer();
         } else {
             addressResultHeader.textContent = 'No CLINK Offer Found';
         }
@@ -200,5 +201,4 @@ checkAddressButton.addEventListener('click', checkLightningAddress);
 
 // Initial State
 nofferInput.value = DEFAULT_NOFFER;
-nofferInput.placeholder = '';
 resetUI();
