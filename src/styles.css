@@ -1,22 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Inter:wght@400;500;600;700&display=swap');
+
 :root {
-    --background-color: #171717;
-    --surface-color: #252525;
-    --primary-color: #7A44D9;
-    --primary-dark: #3D2585;
-    --primary-magenta: #9F2FAD;
-    --secondary-color: #00DAC6;
-    --info-blue: #7999D5;
-    --highlight-yellow: #F7FF00;
-    --text-color: #FFFFFF;
-    --text-muted: #BCBCBC;
-    --border-color: #252525;
-    --input-bg-color: #252525;
+    --background-color: #111213;
+    --surface-color: #212325;
+    --primary-color: #9B63FF;
+    --primary-dark: #8A6BE5;
+    --accent-yellow: #F7FF00;
+    --text-color: #F1F1F1;
+    --text-muted: #8A8A8A;
+    --border-color: #3C3C3C;
+    --input-bg-color: #212325;
+    --font-display: 'DM Mono', 'Menlo', monospace;
+    --font-body: 'Inter', system-ui, sans-serif;
+    --font-mono: 'DM Mono', 'Menlo', monospace;
+    --radius-surface: 10px;
+    --radius-button: 10px;
 }
 
 body {
     background: var(--background-color);
     color: var(--text-color);
-    font-family: 'Fira Mono', 'Menlo', 'Monaco', 'Consolas', monospace;
+    font-family: var(--font-body);
     line-height: 1.6;
     margin: 0;
     padding: 0;
@@ -34,9 +38,9 @@ main {
 
 .intro-section, .results-section, .decoded-data-container {
     background: var(--surface-color) !important;
-    border: none !important;
+    border: 1px solid var(--border-color) !important;
     box-shadow: 0 2px 12px 0 rgba(0,0,0,0.10) !important;
-    border-radius: 10px !important;
+    border-radius: var(--radius-surface) !important;
 }
 
 .container {
@@ -63,8 +67,10 @@ header h1 {
     overflow-wrap: anywhere;
     flex: 1 1 auto;
     margin: 0;
+    font-family: var(--font-display);
     font-size: 2.2rem;
-    font-weight: 700;
+    font-weight: 300;
+    letter-spacing: -0.021em;
     color: var(--text-color);
     display: inline-block;
     border-bottom: none;
@@ -79,24 +85,20 @@ header h1 {
 }
 
 .nav-logo-img {
-    height: 32px;
-    width: 32px;
-    margin-right: 0.5em;
+    height: 28px;
+    width: auto;
     vertical-align: middle;
 }
 
 .nav-logo-text {
-    font-weight: 700;
-    font-size: 1.25rem;
-    letter-spacing: 1px;
-    color: #fff;
-    vertical-align: middle;
+    display: none;
 }
 
 .nav-link {
-    color: #e0e0e0;
+    color: var(--text-muted);
     text-decoration: none;
-    font-weight: 600;
+    font-family: var(--font-body);
+    font-weight: 500;
     font-size: 1rem;
     padding: 0.5rem 1rem;
     border-radius: 6px;
@@ -106,22 +108,22 @@ header h1 {
 }
 
 .nav-link:hover {
-    background: #232323;
-    color: #a259ff;
-    border-bottom: 2.5px solid #a259ff;
+    background: var(--surface-color);
+    color: var(--primary-color);
+    border-bottom: 2.5px solid var(--primary-color);
 }
 
 .nav-link.active {
-    color: #ffff00;
-    border-bottom: 2.5px solid #ffff00;
-    background: #232323;
+    color: var(--accent-yellow);
+    border-bottom: 2.5px solid var(--accent-yellow);
+    background: var(--surface-color);
 }
 
 footer {
     padding: 1rem;
     text-align: center;
     margin-top: 2rem;
-    border-top: 1px solid #444;
+    border-top: 1px solid var(--border-color);
     color: var(--text-muted);
     font-size: 0.8rem;
     background: none;
@@ -134,7 +136,7 @@ footer a {
 }
 
 footer a:hover {
-    color: var(--secondary-color);
+    color: var(--accent-yellow);
     text-decoration: underline;
 }
 
@@ -147,16 +149,20 @@ main p, .intro-section p, .results-section p, .decoded-data-container p {
 
 h2 {
     color: var(--text-color);
+    font-family: var(--font-display);
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 300;
+    letter-spacing: -0.014em;
     margin-top: 0;
     margin-bottom: 0.5rem;
 }
 
 h3 {
     color: var(--primary-color);
+    font-family: var(--font-display);
     font-size: 1.2rem;
-    font-weight: 700;
+    font-weight: 400;
+    letter-spacing: -0.007em;
 }
 
 .content-section {
@@ -176,7 +182,7 @@ h3 {
 }
 
 .content-section a {
-    color: var(--info-blue);
+    color: var(--primary-color);
     text-decoration: none;
 }
 
@@ -222,11 +228,12 @@ blockquote {
 }
 
 code {
-    background: #181818;
-    color: var(--secondary-color);
+    background: var(--background-color);
+    color: var(--accent-yellow);
     border-radius: 4px;
     padding: 0.2em 0.4em;
-    font-family: 'Fira Code', 'Menlo', monospace;
+    font-family: var(--font-mono);
+    font-size: 0.92em;
 }
 
 .demo-section {
@@ -261,12 +268,12 @@ main textarea, main input[type="number"], main input[type="text"], main input[ty
 
 main textarea:focus, main input[type="number"]:focus, main input[type="text"]:focus, main input[type="email"]:focus {
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px #7A44D955;
+    box-shadow: 0 0 0 2px rgba(155, 99, 255, 0.33);
     outline: none;
 }
 
 main textarea:hover, main input[type="number"]:hover, main input[type="text"]:hover, main input[type="email"]:hover {
-    box-shadow: 0 0 0 2px #00DAC633;
+    box-shadow: 0 0 0 2px rgba(247, 255, 0, 0.2);
 }
 
 main textarea {
@@ -295,37 +302,36 @@ main button,
 .decoded-data-container button {
     display: block;
     width: 100%;
-    padding: 0.85rem;
+    height: 42px;
+    padding: 0 1rem;
     margin-top: 1rem;
-    background: linear-gradient(90deg, var(--secondary-color) 0%, var(--primary-color) 20%, var(--primary-color) 80%, var(--highlight-yellow) 100%);
-    color: var(--text-color);
+    background: var(--accent-yellow);
+    color: var(--background-color);
     border: none;
-    border-radius: 8px;
+    border-radius: var(--radius-button);
+    font-family: var(--font-body);
     font-size: 1rem;
-    font-weight: bold;
+    font-weight: 500;
     cursor: pointer;
-    transition: box-shadow 0.2s, filter 0.2s, background 0.2s;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 2px 8px 0 rgba(122,68,217,0.10);
+    transition: box-shadow 0.2s, background 0.2s, color 0.2s;
+    box-shadow: 0 2px 8px 0 rgba(247, 255, 0, 0.12);
 }
 
 .demo-section button:hover:not(:disabled),
 main button:hover:not(:disabled),
 .results-section button:hover:not(:disabled),
 .decoded-data-container button:hover:not(:disabled) {
-    filter: brightness(1.08) saturate(1.2);
-    box-shadow: 0 4px 16px 0 rgba(122,68,217,0.18);
-    background: linear-gradient(90deg, #00dac6 0%, #9f2fad 20%, #9f2fad 80%, #f7ff00 100%);
+    background: var(--primary-color);
     color: var(--text-color);
+    box-shadow: 0 4px 16px 0 rgba(155, 99, 255, 0.22);
 }
 
 .demo-section button:disabled,
 main button:disabled,
 .results-section button:disabled,
 .decoded-data-container button:disabled {
-    background: #393939;
-    color: #aaa;
+    background: var(--border-color);
+    color: var(--text-muted);
 }
 
 .results-section {
@@ -336,9 +342,10 @@ main button:disabled,
 .results-section h3 {
     margin-top: 0;
     margin-bottom: 1rem;
-    color: var(--highlight-yellow);
+    color: var(--accent-yellow);
+    font-family: var(--font-display);
     font-size: 1.3rem;
-    font-weight: 700;
+    font-weight: 400;
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 0.5rem;
 }
@@ -346,11 +353,11 @@ main button:disabled,
 .results-section pre,
 .decoded-data-container pre {
     min-height: 120px;
-    background: #181818;
-    color: var(--secondary-color);
+    background: var(--background-color);
+    color: var(--accent-yellow);
     border-radius: 6px;
     padding: 0.5rem 0.5rem;
-    font-family: 'Fira Code', 'Menlo', monospace;
+    font-family: var(--font-mono);
     font-size: 1.05rem;
     white-space: pre-wrap;
     overflow-x: hidden;
@@ -372,7 +379,7 @@ main button:disabled,
 
 hr {
     border: none;
-    border-top: 1px solid #444;
+    border-top: 1px solid var(--border-color);
     margin: 2rem 0;
 }
 
@@ -383,8 +390,8 @@ hr {
     align-items: center;
     justify-content: center;
     background: var(--surface-color);
-    border: 1.5px solid var(--border-color);
-    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-surface);
     padding: 8px;
 }
 
@@ -416,7 +423,7 @@ main a, .intro-section a, .results-section a, .decoded-data-container a {
 }
 
 main a:hover, .intro-section a:hover, .results-section a:hover, .decoded-data-container a:hover {
-    color: var(--secondary-color);
+    color: var(--accent-yellow);
     text-decoration: underline;
 }
 
@@ -533,8 +540,8 @@ main a:hover, .intro-section a:hover, .results-section a:hover, .decoded-data-co
     width: 100%;
     padding: 0.75rem;
     border: 1px solid var(--border-color);
-    border-radius: 8px;
-    font-family: 'Fira Code', 'Menlo', monospace;
+    border-radius: var(--radius-surface);
+    font-family: var(--font-mono);
     font-size: 0.9rem;
     background-color: var(--input-bg-color);
     color: var(--text-color);
@@ -545,7 +552,7 @@ main a:hover, .intro-section a:hover, .results-section a:hover, .decoded-data-co
 #lnAddressInput:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px #7A44D955;
+    box-shadow: 0 0 0 3px rgba(155, 99, 255, 0.33);
 }
 
 .form-group textarea,
@@ -567,11 +574,11 @@ main a:hover, .intro-section a:hover, .results-section a:hover, .decoded-data-co
 }
 
 .main-nav {
-    background: #181818;
+    background: var(--background-color);
     position: sticky;
     top: 0;
     z-index: 100;
-    border-bottom: 2px solid #393939;
+    border-bottom: 1px solid var(--border-color);
     box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
     padding: 0.5rem 0;
 }
@@ -623,7 +630,7 @@ main a:hover, .intro-section a:hover, .results-section a:hover, .decoded-data-co
     display: block;
     height: 3px;
     width: 100%;
-    background: #fff;
+    background: var(--text-color);
     border-radius: 2px;
     transition: background 0.18s;
 }
@@ -637,7 +644,7 @@ main a:hover, .intro-section a:hover, .results-section a:hover, .decoded-data-co
         top: 100%;
         left: 0;
         right: 0;
-        background: #181818;
+        background: var(--background-color);
         border-radius: 0 0 12px 12px;
         box-shadow: 0 6px 24px 0 #0005;
         flex-direction: column;
@@ -663,28 +670,28 @@ body, html {
 }
 
 .spec-select {
-    background: #181818;
-    color: #fff;
-    border: 1.5px solid var(--primary-color);
-    border-radius: 8px;
+    background: var(--background-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-surface);
     padding: 0.5em 2.2em 0.5em 1em;
     font-size: 1.08em;
-    font-family: inherit;
+    font-family: var(--font-body);
     appearance: none;
     outline: none;
-    box-shadow: 0 2px 12px 0 rgba(122,68,217,0.08);
+    box-shadow: 0 2px 12px 0 rgba(155, 99, 255, 0.08);
     transition: border 0.18s, box-shadow 0.18s;
     cursor: pointer;
     min-width: 160px;
     margin-bottom: 0.5em;
-    background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="16" viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M7.293 7.293a1 1 0 011.414 0L10 8.586l1.293-1.293a1 1 0 111.414 1.414l-2 2a1 1 0 01-1.414 0l-2-2a1 1 0 010-1.414z"/></svg>');
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23F1F1F1" height="16" viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M7.293 7.293a1 1 0 011.414 0L10 8.586l1.293-1.293a1 1 0 111.414 1.414l-2 2a1 1 0 01-1.414 0l-2-2a1 1 0 010-1.414z"/></svg>');
     background-repeat: no-repeat;
     background-position: right 0.8em center;
     background-size: 1.1em;
 }
 .spec-select:focus {
-    border-color: var(--secondary-color);
-    box-shadow: 0 0 0 2px #00DAC655;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(155, 99, 255, 0.33);
 }
 
 /* Diagram image tweaks on intro page */
@@ -706,11 +713,11 @@ body, html {
 
 /* Markdown code block styling for specs page */
 .content-section pre {
-    background: #181818;
-    color: var(--secondary-color);
+    background: var(--background-color);
+    color: var(--accent-yellow);
     border-radius: 6px;
     padding: 1em;
-    font-family: 'Fira Code', 'Menlo', monospace;
+    font-family: var(--font-mono);
     font-size: 1rem;
     margin: 1.5em 0;
     box-sizing: border-box;
@@ -722,11 +729,11 @@ body, html {
 }
 
 .content-section code {
-    background: #181818;
-    color: var(--secondary-color);
+    background: var(--background-color);
+    color: var(--accent-yellow);
     border-radius: 4px;
     padding: 0.2em 0.4em;
-    font-family: 'Fira Code', 'Menlo', monospace;
+    font-family: var(--font-mono);
     font-size: 1em;
     word-break: break-all;
     overflow-wrap: anywhere;
