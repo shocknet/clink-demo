@@ -266,6 +266,22 @@ function handleDecodeOrReset(): void {
     decodeOffer();
 }
 
+type Nip05Doc = {
+    clink_offer?: unknown;
+};
+
+function clinkOfferFromNip05(data: Nip05Doc, name: string): string | null {
+    const raw = data.clink_offer;
+    if (typeof raw === 'string') {
+        return raw;
+    }
+    if (!raw || typeof raw !== 'object') {
+        return null;
+    }
+    const offer = (raw as Record<string, unknown>)[name];
+    return typeof offer === 'string' ? offer : null;
+}
+
 async function checkLightningAddress(): Promise<void> {
     let addr = lnAddressInput.value.trim();
     if (!addr && lnAddressInput.placeholder) {
@@ -288,13 +304,8 @@ async function checkLightningAddress(): Promise<void> {
         if (!resp.ok) {
             throw new Error(`HTTP ${resp.status}`);
         }
-        const data = await resp.json();
-        let offer: string | null = null;
-        if (typeof data.clink_offer === 'string') {
-            offer = data.clink_offer;
-        } else if (data.clink_offer && typeof data.clink_offer === 'object') {
-            offer = data.clink_offer[name] ?? null;
-        }
+        const data = await resp.json() as Nip05Doc;
+        const offer = clinkOfferFromNip05(data, name);
         if (offer) {
             addressResultHeader.textContent = 'CLINK Enabled';
             nofferInput.value = offer;
